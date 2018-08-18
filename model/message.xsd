@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://message-router.com.br/command-message"
+		xmlns:mr="http://message-router.com.br/command-message" 
+		elementFormDefault="qualified" >
+
+    <complexType name="message">
+    
+    	<sequence>
+    
+    		<element name="document-id" type="string" minOccurs="1" maxOccurs="1"></element>
+    
+    		<element name="creation-date" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+    
+    		<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+    
+    		<element name="type" minOccurs="1" maxOccurs="1">
+			   <simpleType>
+			    <restriction base="string">
+			      <enumeration value="request"/>
+			      <enumeration value="response"/>
+			      <enumeration value="event"/>
+			    </restriction>
+			  </simpleType>
+    		</element>
+ 
+    		<element name="content-type" minOccurs="1" maxOccurs="1">
+			   <simpleType>
+			    <restriction base="string">
+			      <enumeration value="json"/>
+			      <enumeration value="xml"/>
+			    </restriction>
+			  </simpleType>
+    		</element>
+ 
+    		<element name="payload" type="string" minOccurs="1" maxOccurs="1"></element>
+ 
+    	</sequence>
+ 
+    </complexType>
+
+    <element name="command" type="mr:message"></element>
+    
+</schema>
