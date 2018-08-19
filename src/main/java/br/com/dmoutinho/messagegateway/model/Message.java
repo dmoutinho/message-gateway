@@ -1,20 +1,23 @@
-package dmoutinho.com.br.messagegateway.model;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+package br.com.dmoutinho.messagegateway.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import br.com.dmoutinho.messagegateway.xml.AdapterCDATA;
 
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "message", propOrder = {
+@XmlType(namespace="http://message-router.com.br/message", name = "message", propOrder = {
     "documentId",
     "creationDate",
     "name",
@@ -22,6 +25,7 @@ import javax.persistence.Id;
     "contentType",
     "payload"
 })
+@XmlRootElement(namespace="http://message-router.com.br/message", name = "message")
 public class Message {
 
     @Id
@@ -46,13 +50,20 @@ public class Message {
     protected String contentType;
     
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(value = AdapterCDATA.class)
     protected String payload;
 
     public String getDocumentId() {
         return documentId;
     }
 
-    /**
+    @Override
+	public String toString() {
+		return "Message [id=" + id + ", documentId=" + documentId + ", creationDate=" + creationDate + ", name=" + name
+				+ ", type=" + type + ", contentType=" + contentType + ", payload=" + payload + "]";
+	}
+
+	/**
      * Sets the value of the documentId property.
      * 
      * @param value

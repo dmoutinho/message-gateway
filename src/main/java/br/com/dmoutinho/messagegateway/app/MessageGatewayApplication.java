@@ -1,4 +1,4 @@
-package dmoutinho.com.br.messagegateway.app;
+package br.com.dmoutinho.messagegateway.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

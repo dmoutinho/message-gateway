@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://message-router.com.br/command-message", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package dmoutinho.com.br.messagegateway.model;
+package br.com.dmoutinho.messagegateway.model;

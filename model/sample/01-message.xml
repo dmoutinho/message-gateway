@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><message xmlns="http://message-router.com.br/message"><document-id>0.34134254798786556</document-id><creation-date>2018-08-18T18:39:35.017-03:00</creation-date><name>validar-cliente</name><type>request</type><content-type>xml</content-type><payload><![CDATA[<xml><test><123456/test></xml>]]></payload></message>

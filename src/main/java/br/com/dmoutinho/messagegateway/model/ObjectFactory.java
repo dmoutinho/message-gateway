@@ -6,9 +6,14 @@
 //
 
 
-package dmoutinho.com.br.messagegateway.model;
+package br.com.dmoutinho.messagegateway.model;
 
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
@@ -31,7 +36,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Command_QNAME = new QName("http://message-router.com.br/command-message", "command");
+    private final static QName _Command_QNAME = new QName("http://message-router.com.br/message", "message");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: dmoutinho.com.br.messagegateway.model
@@ -56,5 +61,20 @@ public class ObjectFactory {
     public JAXBElement<Message> createCommand(Message value) {
         return new JAXBElement<Message>(_Command_QNAME, Message.class, null, value);
     }
+    
+
+    public String toXML(Message message) throws JAXBException {
+
+		StringWriter sw = new StringWriter();
+
+		JAXBContext jaxbContext = JAXBContext.newInstance(Message.class);
+
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
+		jaxbMarshaller.marshal(this.createCommand(message),sw);
+
+		return sw.toString();
+
+	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-		targetNamespace="http://message-router.com.br/command-message"
-		xmlns:mr="http://message-router.com.br/command-message" 
+		targetNamespace="http://message-router.com.br/message"
+		xmlns:mr="http://message-router.com.br/message" 
 		elementFormDefault="qualified" >
 
     <complexType name="message">
@@ -27,8 +27,9 @@
     		<element name="content-type" minOccurs="1" maxOccurs="1">
 			   <simpleType>
 			    <restriction base="string">
-			      <enumeration value="json"/>
-			      <enumeration value="xml"/>
+			      	<enumeration value="json"/>
+			      	<enumeration value="xml"/>
+					<enumeration value="text"/>
 			    </restriction>
 			  </simpleType>
     		</element>
@@ -39,6 +40,6 @@
  
     </complexType>
 
-    <element name="command" type="mr:message"></element>
+    <element name="message" type="mr:message"></element>
     
 </schema>
