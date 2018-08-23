@@ -8,6 +8,8 @@
 
 package br.com.dmoutinho.messagegateway.model;
 
+import java.io.File;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
@@ -77,4 +79,12 @@ public class ObjectFactory {
 
 	}
 
+    public Message toMessage(File file) throws JAXBException {
+        return (Message)JAXBContext.newInstance(Message.class).createUnmarshaller().unmarshal(file);
+	};
+
+    public Message toMessage(String str) throws JAXBException {
+        return (Message)JAXBContext.newInstance(Message.class).createUnmarshaller().unmarshal(new StringReader(str));
+	};
+	
 }

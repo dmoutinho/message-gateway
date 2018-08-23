@@ -3,15 +3,14 @@ package br.com.dmoutinho.messagegateway;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+
 import java.util.Arrays;
 import java.util.Date;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -55,10 +54,6 @@ public class MessageGatewayApplicationTests {
 		return message;
 
 	}
-
-	private Message toMessage(File file) throws JAXBException {
-        return (Message)JAXBContext.newInstance(Message.class).createUnmarshaller().unmarshal(file);
-	};
 		
 	@Test
 	public void testMessageMarshal() {
@@ -90,7 +85,7 @@ public class MessageGatewayApplicationTests {
 
 			Arrays.stream(new File("model/sample").listFiles()).forEach((x -> {
 				try {
-					System.out.println("==== " + toMessage(x));
+					System.out.println("==== " + this.messageFactory.toMessage(x));
 				} catch (Exception e) {
 
 					e.printStackTrace();
