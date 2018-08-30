@@ -13,11 +13,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-//import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -29,14 +30,15 @@ import br.com.dmoutinho.messagegateway.model.Message;
 import br.com.dmoutinho.messagegateway.model.ObjectFactory;
 
 @SpringBootApplication
+@EntityScan("br.com.dmoutinho.messagegateway.model")
 public class MessageGatewayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MessageGatewayApplication.class,args);
 	}
 }
 
-//interface MessageRepository extends JpaRepository<Message,Long> {
-//}
+interface MessageRepository extends JpaRepository<Message,Long> {
+}
 
 @Configuration
 @EnableJms
@@ -88,8 +90,8 @@ class MessageGatewayProcessor implements ApplicationRunner {
 	@Autowired
 	private Environment environment;
 
-//	@Autowired
-//	private MessageRepository messageRepository;
+	@Autowired
+	private MessageRepository messageRepository;
 	
 	private List<String> name;
 	private List<String> type;
@@ -102,9 +104,9 @@ class MessageGatewayProcessor implements ApplicationRunner {
 			
 			Message message = new ObjectFactory().toMessage(msg);
 
-//			this.messageRepository.save(message);
+			this.messageRepository.save(message);
 			
-			System.out.println( message );
+			this.messageRepository.findAll().forEach( x-> System.err.println(x) );
 		
 		} catch (Exception e) {
 			e.printStackTrace();
